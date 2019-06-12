@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.7.0'
+}
+
+group 'Selenide.Allure'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    selenideVersion = '5.2.2'
+    junit4Version = '4.12'
+    junit5Version = '5.4.2'
+    allureVersion = '2.7.0'
+}
+dependencies {
+    testImplementation "junit:junit:$junit4Version"
+    testImplementation"org.junit.jupiter:junit-jupiter-api:$junit5Version"
+    implementation "com.codeborne:selenide:$selenideVersion"
+    testRuntime"org.junit.jupiter:junit-jupiter-engine:$junit5Version"
+
+    testRuntimeOnly "io.qameta.allure:allure-junit5:$allureVersion"
+    implementation "io.qameta.allure:allure-selenide:$allureVersion"
+    implementation 'com.github.javafaker:javafaker:0.18'
+}
+
+test{
+    ignoreFailures = true
+    useJUnitPlatform()
+}
+
+allure {
+    version = '2.4.1'
+    aspectjweaver = true
+    configuration = 'compile'
+    autoconfigure = true
+    useJUnit5 {
+        version = '2.0-BETA22'
+    }
+}
